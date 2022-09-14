@@ -1,101 +1,282 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+
+
+
+
 *{
-    margin: 0;
     padding: 0;
-    font-family: 'Roboto',sans-serif;
+    margin: 0;
     box-sizing: border-box;
 
 }
-.header{
-    height: 100vh;
-    width: 100%;
-    padding: 0 8%;
-    background: #080008;
-    position: relative;
 
+body{
+
+    font-family: 'Poppins',sans-serif;
+}
+h1,h2{
+    font-family: sans-serif;
+    font-weight:400 ;
+}
+a{
+    text-decoration: none;
 }
 
-nav{
+li{
+    list-style: none;
+}
+.flex{
     display: flex;
-    align-items: center; 
+}
+
+.flex_space{
+    display: flex;
     justify-content: space-between;
 }
-.logo{
-    width: 140px;
+.logo img {
+    height: 50px;
+    width: auto;
 }
-.nav-links{
-    padding: 28px 0;
-}
-.nav-links li{
-    display: inline-block;
-    margin: 0 15px;
-
-}
-.nav-links li a{
-    text-decoration: none;
-    color: #fff;
-    padding: 5px 0;
-    position: relative;
-}
-.nav-links li a::after{
-    content:'';
-    background-color: #ff3d00;
-    width:0;
-    height: 2px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    transition:width 0.5s;
-}
-
-.nav-links li a:hover::after{
-    width:100%;
-}
-.btn{
-    background-color: #ff3d00;
-    color: #fff;
-    padding: 10px 30px;
-    border-radius: 3px;
-    cursor: pointer;
-}
-.content{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 90%;
-    max-width: 900px;
-    transform: translate(-50%,-50%);
-    text-align: center;
-    color: #fff;
-    padding-top: 50px;
-}
-.content h1{
-    font-size: 65px;
-    font-weight: 600;
-    margin-bottom: 40px;
-}
-.content h2{
-    font-size: 25px;
-    font-weight: 200;
-    margin-bottom: 40px;
-}
-.content form{
-    background: #fff;
-    padding: 10px;
-    border-radius: 8px;
-    display: flex;
-}
-.content form input{
-    flex: 1;
+button{
     border: none;
+    background: none;
     outline: none;
+    transition: 0.5s;
+    cursor:pointer;
+}
+.primary-btn{
+    padding: 15px 40px;
+    background: #7fc142;
+    font-weight: bold;
+    color: white;
+}
+.secondary-btn{
+    padding: 15px 40px;
+    background: #7fc142;
+    font-weight: bold;
+    color: white;
+}
+.container {
+  max-width: 85%;
+  margin: auto;
+}
+
+/*--------header---------*/
+header {
+    height: 10vh;
+    line-height: 10vh;
     padding: 0 20px;
-    font-size: 18px;
-}
-.content form button{
-    background: #ff3d00;
+  }
+  header img {
+    margin: 20px 0;
+  }
+  
+  header ul {
+    display: inline-block;
+  }
+  
+  header ul li {
+    display: inline-block;
+    text-transform: uppercase;
+  }
+  header ul li a {
+    color: #000;
+    margin: 0 10px;
+    transition: 0.5s;
+  }
+  header ul li a:hover {
+    color: #7fc142;
+  }
+  header i {
+    margin: 0 20px;
+  }
+  header button {
+    padding: 13px 40px;
+  }
+  
+  header .navlinks span {
+    display: none;
+  }
+
+  @media only screen and (max-width:768px) {
+    header ul {
+      position: absolute;
+      top: 100px;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: #009f7f;
+      overflow: hidden;
+      transition: max-height 0.5s;
+      text-align: center;
+      z-index: 9;
+    }
+  
+    header ul li {
+      display: block;
+    }
+  
+    header ul li a {
+      color: white;
+    }
+  
+    header i {
+      color: white;
+    }
+  
+    header .navlinks span {
+      color: black;
+      display: block;
+      cursor: pointer;
+      line-height: 10vh;
+      font-size: 25px;
+    }
+  }
+
+  /*--------header---------*/
+/*--------home---------*/
+.home {
+    height: 100vh;
     color: #fff;
-    padding: 10px;
+  }
+  
+  .home img {
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .home .text {
+    position: absolute;
+    top: 35%;
+    left: 5%;
+  }
+  
+  .home .text h1 {
+    font-size: 80px;
+    font-family: serif;
+    font-weight: 400;
+  }
+  
+  .home p {
+    margin: 20px 0;
+  }
+  
+  .home button {
+    margin-right: 20px;
+  }
+
+  .owl-nav .owl-prev,
+  .owl-nav .owl-next {
+    position: absolute;
+    top: 40%;
+    height: 50px;
+    width: 50px;
+    background: rgba(0, 0, 0, 0.5) !important;
+    color: #fff;
+  }
+  
+  .owl-nav .owl-prev {
+    left: 0;
+  }
+  
+  .owl-nav .owl-next {
+    right: 0;
+  }
+  /*--------home---------*/
+/*--------book---------*/
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+  }
+  
+  input {
+    outline: none;
     border: none;
-    border-radius: 100px;
-    cursor: pointer;
-}
+    width: 100%;
+  }
+  
+  .book {
+    padding: 40px 0;
+    background: #282834;
+    color: #fff;
+  }
+  
+  h1 {
+    font-family: serif;
+  }
+  
+  .book h1 {
+    font-size: 28px;
+  }
+  
+  .book h1 span {
+    color: #7fc142;
+  }
+  
+  .book input {
+    padding: 20px;
+  }
+  
+  .book input:nth-last-child(1) {
+    background: #7fc142;
+    color: #fff;
+  }
+  
+  /*--------book---------*/
+  /*--------about---------*/
+  
+.left, .right {
+    width: 50%;
+    padding: 30px;
+  }
+  
+  .top {
+    margin-top: 80px;
+  }
+  
+  .mtop {
+    margin-top: 40px;
+  }
+  
+  .heading h1 {
+    font-size: 100px;
+    font-weight: 500;
+    opacity: 0.1;
+    font-family: serif;
+    position: absolute;
+    top: -30px;
+  }
+  
+  .heading h2 {
+    margin: 30px 0;
+    font-size: 45px;
+    font-family: serif;
+    font-weight: 400;
+  }
+  
+  .about .heading h1 {
+    top: 55px;
+  }
+  
+  .about {
+    position: relative;
+  }
+  
+  .about .left {
+    margin-top: 30px;
+  }
+  
+  .about p {
+    font-size: 15px;
+  }
+  
+  .about button {
+    margin: 30px 0;
+  }
+  
+  /*--------about---------*/
+
+
+/*--------home---------*/
+/*--------book---------*/  
