@@ -1,1 +1,1 @@
-web: python3 booking/app.py
+web: gunicorn booking.app:app

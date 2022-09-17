@@ -1,5 +1,5 @@
 from flask import Flask,render_template
-from routes import static_blueprint, api_blueprint
+from booking.routes import static_blueprint, api_blueprint
 
 app = Flask(__name__)
 app.register_blueprint(
