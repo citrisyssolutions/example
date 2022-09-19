@@ -3,4 +3,5 @@
 *.pyc
 **/*.pyc
 __pycache__/
- *.pyc
+*.pyc
+BookingExample.egg-info/*

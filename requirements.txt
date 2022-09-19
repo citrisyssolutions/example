@@ -1,3 +1,4 @@
+# -e git+https://github.com/citrisyssolutions/example.git@f83c9c0b47f1b4ade7a5639731a66618ae3fa61d#egg=BookingExample
 certifi==2022.9.14
 charset-normalizer==2.1.1
 click==8.1.3

@@ -6,6 +6,10 @@ static_blueprint = Blueprint('static_blueprint', __name__)
 def index():
     return render_template("index.html")
 
-@static_blueprint.route('/room')
+@static_blueprint.route('/about')
 def room():
     return render_template("room.html")
+
+@static_blueprint.route('/contact')
+def contact():
+    return render_template("contact.html")
