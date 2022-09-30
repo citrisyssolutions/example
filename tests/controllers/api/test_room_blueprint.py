@@ -2,6 +2,8 @@ from unittest import TestCase
 from unittest import mock
 from booking.app import app
 
+EXAMPLE_ROOM = {"room_id": 1, "room_name": "TestRoom", "room_type": "Delux"}
+
 class TestRoomBlueprint(TestCase):
 
     @classmethod
@@ -22,12 +24,12 @@ class TestRoomBlueprint(TestCase):
         # Assert
         self.assertEqual(response.json ,expected_response)
 
-    @mock.patch("booking.repositories.room.RoomRepository.insert", return_value={"room_id": 1, "room_name": "TestRoom", "room_type": "Delux"})
+    @mock.patch("booking.repositories.room.RoomRepository.insert", return_value=EXAMPLE_ROOM)
     def test_add_new_room(self, *mocks) -> None:
         # Arrange
         url = "/api/room/"
         input = {"room_name": "TestRoom", "room_type": "Delux"}
-        expected_response = {"room_id": 1, "room_name": "TestRoom", "room_type": "Delux"}
+        expected_response = EXAMPLE_ROOM
 
         # Act
         response = self.test_client.post(url, json=input)
