@@ -15,7 +15,6 @@ def index():
 @room_blueprint.route("/", methods=["POST"])
 def create_room():
     data = json.loads(request.get_data())
-    
     try:
         req = AddRoomRequest(**data)
     except:
@@ -23,7 +22,5 @@ def create_room():
     repo = RoomRepository()
     create_room = AddRoomUseCase(repo)
     res = create_room.handle(req)
-    
-
     print(res.room_id)
     return req.room_type
