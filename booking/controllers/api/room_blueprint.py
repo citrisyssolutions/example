@@ -1,6 +1,6 @@
 import json
 from flask import Blueprint, render_template, request
-
+from flask import jsonify
 from booking.dto.request.room.add_room import AddRoomRequest
 from booking.exception.errors import ValidationError
 from booking.repositories.room import RoomRepository
@@ -22,5 +22,4 @@ def create_room():
     repo = RoomRepository()
     create_room = AddRoomUseCase(repo)
     res = create_room.handle(req)
-    print(res.room_id)
-    return req.room_type
+    return jsonify(res)
