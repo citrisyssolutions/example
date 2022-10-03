@@ -1,4 +1,5 @@
 from unittest import TestCase
+from booking.exception.errors import ValidationError
 
 from booking.dto.request.room.add_room import AddRoomRequest
 
@@ -36,3 +37,18 @@ class TestAddRoomRequest(TestCase):
 
         # Assert
         self.assertTrue(TypeError == context.exception.__class__)
+
+    def test_raise_error_if_wrong_room_type_passed(self):
+        # Arrange
+        room_name = "This is room"
+        room_type = "Dummy"
+
+        # Act
+        with self.assertRaises(Exception) as context:
+            add_room_dto = AddRoomRequest(
+                room_name=room_name,
+                room_type=room_type
+            )
+
+        # Assert
+        self.assertTrue(ValidationError == context.exception.__class__)

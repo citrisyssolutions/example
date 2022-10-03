@@ -17,8 +17,8 @@ def create_room():
     data = json.loads(request.get_data())
     try:
         req = AddRoomRequest(**data)
-    except:
-        raise ValidationError("Invalid input")
+    except Exception as _e:
+        raise ValidationError(f"Invalid input {_e}")
     repo = RoomRepository()
     create_room = AddRoomUseCase(repo)
     res = create_room.handle(req)
