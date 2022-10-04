@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from booking.entities.room_type import RoomType
+from entities.room_type import RoomType
 
 @dataclass
 class Room:
