@@ -8,7 +8,7 @@ import json
 from entities.room import Room
 from .ibase import IBaseRepository
 
-DATAFILE= "data.json"
+DATAFILE= "/tmp/data.json"
 
 class RoomRepository(IBaseRepository):
     def __init__(self):

@@ -12,12 +12,12 @@ app.register_blueprint(
     url_prefix="/api"
 )
 
-@app.errorhandler(Exception)
-def all_exception_handler(error):
-    try:
-        return f"[Error] {error.message}", 500
-    except:
-         return "unkown error"
+# @app.errorhandler(Exception)
+# def all_exception_handler(error):
+#     try:
+#         return f"[Error] {error.message}", 500
+#     except:
+#          return "unkown error"
         
        
 if __name__ == '__main__':

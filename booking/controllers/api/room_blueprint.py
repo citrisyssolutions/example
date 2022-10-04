@@ -7,9 +7,10 @@ from exception.errors import ValidationError
 from repositories.room import RoomRepository
 from usecases.room.add_room import AddRoomUseCase
 
+
 room_blueprint = Blueprint('room_blueprint', __name__)
 
-DATA_FILE ="data.json"
+DATA_FILE ="/tmp/data.json"
 @room_blueprint.route('/', methods=["GET"])
 def index():
      data = []
@@ -17,8 +18,8 @@ def index():
         data = json.load(open(DATA_FILE, "r"))
      print(data)
      return data
-    
-   # return [{"id": 1, "name": "Room #1"}]
+
+   
 
 @room_blueprint.route("/", methods=["POST"])
 def create_room():
