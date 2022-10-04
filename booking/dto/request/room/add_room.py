@@ -1,6 +1,6 @@
 import dataclasses
 
-from booking.entities.room_type import RoomType
+from entities.room_type import RoomType
 from .ibase import IBaseRequest
 
 @dataclasses.dataclass

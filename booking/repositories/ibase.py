@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
-from booking.dto.request.room.ibase import IBaseRequest
+from dto.request.room.ibase import IBaseRequest
 
-from booking.entities.room import Room
+from entities.room import Room
 
 class IBaseRepository(metaclass=ABCMeta):
     @abstractmethod
