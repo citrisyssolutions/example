@@ -4,6 +4,7 @@ from dto.request.room.ibase import IBaseRequest
 from dto.response.room.add_room import AddRoomResponse
 import os
 import json
+from dto.request.room.update_room import UpdateRoomRequest
 
 from entities.room import Room
 from .ibase import IBaseRepository
@@ -32,8 +33,24 @@ class RoomRepository(IBaseRepository):
     def get(self):
         return self.data
   
-    def update(self, req: AddRoomRequest) -> int:
-        raise NotImplementedError()
+    def update(self, update_room_req: UpdateRoomRequest) -> Room:
+        updated_room = {}
+        room_index = -1
+        print("Updating")
+        for index,room in enumerate(self.data):
+            if room['room_name']==update_room_req.room_name:
+                print(update_room_req.room_type)
+                updated_room = room
+                if update_room_req.room_type is not None:
+                    updated_room["room_type"] = update_room_req.room_type
+                room_index = index
+                break
+        print(updated_room)
+        self.data[room_index] = updated_room
+
+        with open(DATAFILE,"w") as df:
+            df.write(json.dumps(self.data))
+        return updated_room 
 
     def get_by_name (self,room_name:str):
         data ={}

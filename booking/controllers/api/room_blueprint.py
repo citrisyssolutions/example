@@ -6,18 +6,33 @@ from dto.request.room.add_room import AddRoomRequest
 from exception.errors import ValidationError
 from repositories.room import RoomRepository
 from usecases.room.add_room import AddRoomUseCase
+from usecases.room.update_room import UpdateRoomUseCase
+from dto.request.room.update_room import UpdateRoomRequest
+from dto.request.room.get_room import GetRoomRequest
+from usecases.room.get_room import GetRoomUseCase
 
 
 room_blueprint = Blueprint('room_blueprint', __name__)
 
-DATA_FILE ="/tmp/data.json"
-@room_blueprint.route('/', methods=["GET"])
-def index():
-     data = []
-     if os.path.exists(DATA_FILE):
-        data = json.load(open(DATA_FILE, "r"))
-     print(data)
-     return data
+@room_blueprint.route("/all",methods=["GET"])
+def get_all():
+    repo = RoomRepository()
+    get_room = GetRoomUseCase(repo)
+    res = get_room.handle(None)
+    return jsonify(res)
+
+@room_blueprint.route("/",methods=["GET"])
+def get_room():
+    data = json.loads(request.get_data())
+    print(data,type(data))
+    try:
+        req = GetRoomRequest(**data)
+    except:
+        raise ValidationError("Invalid input")
+    repo = RoomRepository()
+    get_room = GetRoomUseCase(repo)
+    res = get_room.handle(req)
+    return jsonify(res)
 
    
 
@@ -33,4 +48,21 @@ def create_room():
     res = create_room.handle(req)
   
     return jsonify(res)
+
+@room_blueprint.route("/", methods=["PUT"])
+def update_room():
+    print("requestdata:",request.get_data(),type(request.get_data()))
+    data = json.loads(request.get_data())
+    print(data,type(data))
+    try:
+        req = UpdateRoomRequest(**data)
+    except:
+        raise ValidationError("Invalid input")
+    repo = RoomRepository()
+    print("repo",repo)
+    update_room = UpdateRoomUseCase(repo)
+    res = update_room.handle(req)
+    return jsonify(res)
+
+    
 
