@@ -20,8 +20,4 @@ class AddRoomUseCase:
             raise ValidationError("data exists")
         # except:
         #     raise ValidationError("Can't insert")
-        return Room(
-            room_id=room["room_id"],
-            room_type=room["room_type"],
-            room_name=room["room_name"]
-        )
+        return room

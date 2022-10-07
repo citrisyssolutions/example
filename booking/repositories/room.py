@@ -6,7 +6,6 @@ import os
 from flask import jsonify
 import json
 from dto.request.room.update_room import UpdateRoomRequest
-from flask_marshmallow import Marshmallow
 from entities.room import Room
 from .ibase import IBaseRepository
 import sqlite3
@@ -29,43 +28,33 @@ class RoomRepository(IBaseRepository):
         self.roomtable = Table(
                        "room",
                         self.metadata,
-                        Column("id", Integer, primary_key=True, autoincrement=True),
+                        Column("room_id", Integer, primary_key=True, autoincrement=True),
                         Column("room_name", String(255)),
                         Column("room_type", String(255)))
         
         
-        self.engine = create_engine("sqlite:////tmp/mydb_2.db")
+        self.engine = create_engine("sqlite:////tmp/mydb_3.db")
         self.conn= self.engine.connect()
         self.metadata.create_all(self.engine)
-        #mapper_registry.map_imperatively(Room, room)
+        self.session = sessionmaker(bind=self.engine)()
+        mapper_registry = registry()
+
+
+        try:
+            mapper_registry.map_imperatively(Room, self.roomtable)
+        except:
+            pass
         
 
     def insert(self, add_room_req: AddRoomRequest) -> Room:
-        res = {
-            #"room_id": len(self.data)+1,
-            "room_name": add_room_req.room_name,
-            "room_type": add_room_req.room_type
-        }
-        
-
-
-       # self.data.append(res)
-       # mapper_registry = registry()
-        #mapper_registry.map_imperatively(Room, self.roomtable)
-        #session = sessionmaker(bind=self.engine)()
-        #session.add(res)
-        #session.commit()
-        print("without execute")
-        new= jsonify(res)
-        result= self.conn.execute(new)
-        print(result)
-        #result = session.query(Room).all()
-        for res in result:
-             print(res.room_name)
-       
-        # with open (DATAFILE,"w") as a:
-        #     a.write(json.dumps(self.data))
-        return res
+        new_room = Room(
+            room_name=add_room_req.room_name,
+            room_type=add_room_req.room_type
+        )
+        result= self.session.add(new_room)
+        self.session.commit()
+        self.session.flush()
+        return new_room
 
     def get(self):
         return self.data
