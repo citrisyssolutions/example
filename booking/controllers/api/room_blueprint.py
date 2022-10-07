@@ -22,4 +22,5 @@ def create_room():
     repo = RoomRepository()
     create_room = AddRoomUseCase(repo)
     res = create_room.handle(req)
+    print(res)
     return jsonify(res)

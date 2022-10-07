@@ -12,10 +12,6 @@ class AddRoomUseCase:
     def handle(self, request: AddRoomRequest) -> Room:
         try:
             room = self.repo.insert(request)
-        except:
-            raise Exception("Can't insert")
-        return Room(
-            room_id=room["room_id"],
-            room_type=room["room_type"],
-            room_name=room["room_name"]
-        )
+        except Exception as _e:
+            raise Exception(f"Can't insert, reason: {_e}")
+        return room
