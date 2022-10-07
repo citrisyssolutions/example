@@ -4,7 +4,7 @@ from booking.entities.room_type import RoomType
 
 @dataclasses.dataclass
 class AddRoomResponse:
-    room_id: int
+    id: int
     room_type: RoomType
     room_name: str
 

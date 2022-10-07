@@ -2,6 +2,7 @@ import json
 from flask import Blueprint, render_template, request
 from flask import jsonify
 from booking.dto.request.room.add_room import AddRoomRequest
+from booking.dto.response.room.add_room import AddRoomResponse
 from booking.exception.errors import ValidationError
 from booking.repositories.room import RoomRepository
 from booking.usecases.room.add_room import AddRoomUseCase
@@ -21,5 +22,10 @@ def create_room():
         raise ValidationError(f"Invalid input {_e}")
     repo = RoomRepository()
     create_room = AddRoomUseCase(repo)
-    res = create_room.handle(req)
+    room = create_room.handle(req)
+    res = AddRoomResponse(
+        id=room.room_id,
+        room_name=room.room_name,
+        room_type=room.room_type
+    )
     return jsonify(res)
