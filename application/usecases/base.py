@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from application.dto.request.room.ibase import IBaseRequest
+from application.dto.request.ibase import IBaseRequest
 from application.entities.ibase import IBaseEntity
 
 from application.entities.room import Room
