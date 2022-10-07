@@ -1,5 +1,5 @@
 from unittest import TestCase
-from booking.app import app
+from application.app import app
 
 class TestApp(TestCase):
 

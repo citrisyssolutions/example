@@ -3,10 +3,10 @@ from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import relationship, backref, sessionmaker, registry
 from sqlalchemy.ext.declarative import declarative_base
 
-from booking.entities import Room
-from booking.providers.db import IDBProvider
+from application.entities import Room
+from application.providers.db import IDBProvider
 
-from booking.providers.orm.sqlalchemy_orm.models import room, metadata
+from application.providers.orm.sqlalchemy_orm.models import room, metadata
 
 class SQLAlchemyORM:
 

@@ -1,7 +1,7 @@
 from unittest import TestCase
-from booking.exception.errors import ValidationError
+from application.exception.errors import ValidationError
 
-from booking.dto.request.room.add_room import AddRoomRequest
+from application.dto.request.room.add_room import AddRoomRequest
 
 class TestAddRoomRequest(TestCase):
     @classmethod

@@ -1,11 +1,11 @@
 import json
 from flask import Blueprint, render_template, request
 from flask import jsonify
-from booking.dto.request.room.add_room import AddRoomRequest
-from booking.dto.response.room.add_room import AddRoomResponse
-from booking.exception.errors import ValidationError
-from booking.repositories.room import RoomRepository
-from booking.usecases.room.add_room import AddRoomUseCase
+from application.dto.request.room.add_room import AddRoomRequest
+from application.dto.response.room.add_room import AddRoomResponse
+from application.exception.errors import ValidationError
+from application.repositories.room import RoomRepository
+from application.usecases.room.add_room import AddRoomUseCase
 
 room_blueprint = Blueprint('room_blueprint', __name__)
 

@@ -3,5 +3,6 @@ from . import IDBProvider
 
 @dataclass
 class SQLiteDBSource(IDBProvider):
+    connection_string: str = None
     type: str = "sqlite"
-    connection_string: str = "sqlite:////tmp/mydb_3.db"
+    
