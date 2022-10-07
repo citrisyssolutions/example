@@ -1,8 +1,6 @@
 from flask import Blueprint, render_template
 from .room_blueprint import room_blueprint
 
-
-
 api_blueprint = Blueprint('api_blueprint', __name__)
 api_blueprint.register_blueprint(
     room_blueprint,

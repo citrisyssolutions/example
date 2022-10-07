@@ -1,6 +1,5 @@
 from abc import ABCMeta, abstractmethod
 from application.dto.request.room.add_room import AddRoomRequest
-from application.dto.request.room.ibase import IBaseRequest
 from application.dto.response.room.add_room import AddRoomResponse
 
 from application.entities.room import Room
