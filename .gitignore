@@ -5,3 +5,4 @@
 __pycache__/
 *.pyc
 BookingExample.egg-info/*
+*-checkpoint.ipynb
