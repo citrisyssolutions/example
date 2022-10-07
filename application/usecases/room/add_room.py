@@ -1,9 +1,9 @@
 
 
-from booking.dto.request.room.add_room import AddRoomRequest
-from booking.entities.room import Room
-from booking.usecases.base import IBaseUseCase
-from booking.repositories.room import RoomRepository
+from application.dto.request.room.add_room import AddRoomRequest
+from application.entities.room import Room
+from application.usecases.base import IBaseUseCase
+from application.repositories.room import RoomRepository
 
 
 class AddRoomUseCase(IBaseUseCase):

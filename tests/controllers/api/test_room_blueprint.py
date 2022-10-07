@@ -1,6 +1,6 @@
 from unittest import TestCase
 from unittest import mock
-from booking.app import app
+from application.app import app
 
 EXAMPLE_ROOM = {"room_id": 1, "room_name": "TestRoom", "room_type": "Delux"}
 

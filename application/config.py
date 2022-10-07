@@ -1,5 +1,5 @@
 import os
-from booking.providers.db.sqlite_db_source import SQLiteDBSource
+from application.providers.db.sqlite_db_source import SQLiteDBSource
 
 class Config:
     DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING", "sqlite:////tmp/mydb_3.db")

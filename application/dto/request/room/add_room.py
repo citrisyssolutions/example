@@ -1,8 +1,8 @@
 import dataclasses
-from booking.exception.errors import ValidationError
+from application.exception.errors import ValidationError
 
-from booking.entities.room_type import RoomType
-from booking.dto.request.room.ibase import IBaseRequest
+from application.entities.room_type import RoomType
+from application.dto.request.room.ibase import IBaseRequest
 
 DEFAULT_ROOM_TYPES = ["Delux", "Ordinary"]
 

@@ -1,6 +1,6 @@
 import dataclasses
 
-from booking.entities.room_type import RoomType
+from application.entities.room_type import RoomType
 
 @dataclasses.dataclass
 class AddRoomResponse:
