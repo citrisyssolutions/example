@@ -24,7 +24,7 @@ def create_room():
     create_room = AddRoomUseCase(repo)
     room = create_room.handle(req)
     res = AddRoomResponse(
-        id=room.room_id,
+        id=room.id,
         room_name=room.room_name,
         room_type=room.room_type
     )

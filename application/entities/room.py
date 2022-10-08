@@ -6,5 +6,5 @@ from application.entities.room_type import RoomType
 class Room:
     room_type: RoomType
     room_name: str
-    room_id: int = None
+    id: int = None
 
