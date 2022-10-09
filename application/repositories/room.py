@@ -6,6 +6,10 @@ from application.entities.room import Room
 from .ibase import IBaseRepository
 
 class RoomRepository(IBaseRepository):
+
+    def select(self, select_room_req: AddRoomRequest = None):
+        return self.session.query(Room).all()
+
     def insert(self, add_room_req: AddRoomRequest) -> Room:
         new_room = Room(
             room_name=add_room_req.room_name,
@@ -19,3 +23,5 @@ class RoomRepository(IBaseRepository):
 
     def update(self, req: AddRoomRequest) -> int:
         raise NotImplementedError()
+
+    
