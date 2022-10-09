@@ -4,7 +4,7 @@ metadata = MetaData()
 room = Table(
     "room",
     metadata,
-    Column("room_id", Integer, primary_key=True, autoincrement=True),
+    Column("id", Integer, primary_key=True, autoincrement=True),
     Column("room_name", String(255)),
     Column("room_type", String(255))
 )
