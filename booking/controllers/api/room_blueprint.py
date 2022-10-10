@@ -1,15 +1,17 @@
 import os
 import json
+import os
 from flask import Blueprint, render_template, request
 from flask import jsonify
-from usecases.room.update_room import UpdateRoomUseCase
-from dto.request.room.update_room import UpdateRoomRequest
-from dto.request.room.get_room import GetRoomRequest
-from usecases.room.get_room import GetRoomUseCase
 from dto.request.room.add_room import AddRoomRequest
 from exception.errors import ValidationError
 from repositories.room import RoomRepository
 from usecases.room.add_room import AddRoomUseCase
+from usecases.room.update_room import UpdateRoomUseCase
+from dto.request.room.update_room import UpdateRoomRequest
+from dto.request.room.get_room import GetRoomRequest
+from usecases.room.get_room import GetRoomUseCase
+
 
 room_blueprint = Blueprint('room_blueprint', __name__)
 
@@ -33,6 +35,8 @@ def get_room():
     res = get_room.handle(req)
     return jsonify(res)
 
+   
+
 @room_blueprint.route("/", methods=["POST"])
 def create_room():
     print("requestdata:",request.get_data(),type(request.get_data()))
@@ -40,14 +44,16 @@ def create_room():
     print(data,type(data))
     try:
         req = AddRoomRequest(**data)
-    except:
+        print("helloi",req,type(req))
+
+    except: 
         raise ValidationError("Invalid input")
     repo = RoomRepository()
     print("repo",repo)
     create_room = AddRoomUseCase(repo)
     res = create_room.handle(req)
+  
     return jsonify(res)
-    
 @room_blueprint.route("/", methods=["PUT"])
 def update_room():
     print("requestdata:",request.get_data(),type(request.get_data()))
@@ -64,5 +70,4 @@ def update_room():
     return jsonify(res)
 
     
-
 

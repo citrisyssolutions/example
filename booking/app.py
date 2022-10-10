@@ -18,12 +18,13 @@ def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
-@app.errorhandler(Exception)
-def all_exception_handler(error):
-    print(type(error),error)
-    try:
-       return f"[Error] {error}", 500
-    except:
-        return "unknown error"
+# @app.errorhandler(Exception)
+# def all_exception_handler(error):
+#     try:
+#         return f"[Error] {error.message}", 500
+#     except:
+#          return "unkown error"
+        
+       
 if __name__ == '__main__':
     app.run(debug=True)

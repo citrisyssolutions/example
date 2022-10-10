@@ -10,6 +10,7 @@ class GetRoomRequest(IBaseRequest):
     def __post_init__(self):
         
         if not self.room_name:
+            print("post_init")
             
             raise ValueError("Room Name required")
             

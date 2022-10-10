@@ -14,8 +14,10 @@ class GetRoomUseCase:
         try:
             if request is None:
                 room_data = self.repo.get()
+            
             else:
-                room_data = self.repo.get_name(request.room_name)
+                room_data = self.repo.get_by_name(request.room_name)
+                
         except Exception as _e:
             if isinstance(_e,ValidationError):
                 raise _e

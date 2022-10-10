@@ -12,7 +12,7 @@ class UpdateRoomUseCase:
     
     def handle(self, request: UpdateRoomRequest) -> Room:
         try:
-            room_exist=self.repo.get_name(request.room_name)
+            room_exist=self.repo.get_by_name(request.room_name)
             print(f"Is Room Exists=>{room_exist}")
             if room_exist !={}:
                room = self.repo.update(request)
