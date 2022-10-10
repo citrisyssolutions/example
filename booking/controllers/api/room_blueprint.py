@@ -41,7 +41,9 @@ def create_room():
     data = json.loads(request.get_data())
     try:
         req = AddRoomRequest(**data)
-    except:
+        print("helloi",req,type(req))
+
+    except: 
         raise ValidationError("Invalid input")
     repo = RoomRepository()
     create_room = AddRoomUseCase(repo)

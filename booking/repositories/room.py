@@ -38,14 +38,21 @@ class RoomRepository(IBaseRepository):
         self.metadata.create_all(self.engine)
         self.session = sessionmaker(bind=self.engine)()
         mapper_registry = registry()
-
+        table_name = 'room'
+        query = f'SELECT * FROM {table_name}'
+        new= self.conn.execute(query)
+        
 
         try:
             mapper_registry.map_imperatively(Room, self.roomtable)
         except:
             pass
+        self.out=[]
+        for num in new:
+            print("hi",num)
+            self.out.append(dict(num))
+            print("hi",self.out,type(self.out))
         
-
     def insert(self, add_room_req: AddRoomRequest) -> Room:
         new_room = Room(
             room_name=add_room_req.room_name,
@@ -57,7 +64,21 @@ class RoomRepository(IBaseRepository):
         return new_room
 
     def get(self):
-        return self.data
+        #s= self.room.select()
+        #new= self.conn.execute(s)
+        #for num in new:
+          #return num
+       # s= self.room.select()
+        # table_name = 'room'
+        # query = f'SELECT * FROM {table_name}'
+        # new= self.conn.execute(query)
+        # data=[]
+        # for num in new:
+        #     print("hi",num)
+        #     data.append(dict(num))
+        #     print("hi",data,type(data))
+        # return data
+        return self.out
   
     def update(self, update_room_req: UpdateRoomRequest) -> Room:
         updated_room = {}
@@ -74,14 +95,14 @@ class RoomRepository(IBaseRepository):
         print(updated_room)
         self.data[room_index] = updated_room
 
-        with open(DATAFILE,"w") as df:
-            df.write(json.dumps(self.data))
-        return updated_room 
+        #with open(DATAFILE,"w") as df:
+           # df.write(json.dumps(self.data))
+        #return updated_room 
 
     def get_by_name (self,room_name:str):
-        self.data ={}
+        self.data={}
        
-        for room in self.data:
+        for room in self.out:
             if room['room_name']== room_name: 
                 return room
         return self.data
