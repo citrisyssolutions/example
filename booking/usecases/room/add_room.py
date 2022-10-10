@@ -16,7 +16,7 @@ class AddRoomUseCase:
         if is_room_exist =={}:
             room = self.repo.insert(request)
             print("handle")
-        else:
+        else :
             raise ValidationError("data exists")
         # except:
         #     raise ValidationError("Can't insert")

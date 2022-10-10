@@ -22,5 +22,7 @@ class GetRoomUseCase:
             if isinstance(_e,ValidationError):
                 raise _e
 
-            raise Exception("Can't insert")
+            
+            raise Exception(f"Can't insert {_e}")
+           
         return room_data

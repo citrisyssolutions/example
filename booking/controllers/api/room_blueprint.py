@@ -24,7 +24,7 @@ def get_all():
 @room_blueprint.route("/",methods=["GET"])
 def get_room():
     data = json.loads(request.get_data())
-    print(data,type(data))
+    #print(data,type(data))
     try:
         req = GetRoomRequest(**data)
     except:
@@ -51,9 +51,9 @@ def create_room():
 
 @room_blueprint.route("/", methods=["PUT"])
 def update_room():
-    print("requestdata:",request.get_data(),type(request.get_data()))
+   # print("requestdata:",request.get_data(),type(request.get_data()))
     data = json.loads(request.get_data())
-    print(data,type(data))
+   # print(data,type(data))
     try:
         req = UpdateRoomRequest(**data)
     except:

@@ -33,11 +33,21 @@ class RoomRepository(IBaseRepository):
                         Column("room_type", String(255)))
         
         
-        self.engine = create_engine("sqlite:////tmp/mydb_3.db")
+        self.engine = create_engine("sqlite:////tmp/mydb.db")
         self.conn= self.engine.connect()
         self.metadata.create_all(self.engine)
         self.session = sessionmaker(bind=self.engine)()
         mapper_registry = registry()
+        table_name = 'room'
+        query = f'SELECT * FROM {table_name}'
+      
+        result= self.conn.execute(query)
+        self.new1=[]
+           
+        for row in result:
+            self.new1.append(dict(row))
+            print(self.new1)
+            print(type(self.new1))
 
 
         try:
@@ -47,17 +57,26 @@ class RoomRepository(IBaseRepository):
         
 
     def insert(self, add_room_req: AddRoomRequest) -> Room:
-        new_room = Room(
+        self.new_room = Room(
             room_name=add_room_req.room_name,
             room_type=add_room_req.room_type
         )
-        result= self.session.add(new_room)
+        result= self.session.add(self.new_room)
+        print(result)
         self.session.commit()
         self.session.flush()
-        return new_room
+        return self.new_room
 
     def get(self):
-        return self.data
+        # table_name = 'room'
+        # query = f'SELECT * FROM {table_name}'
+        # result= self.conn.execute(query)
+        # new1=[]
+        # for row in result:
+        #      new1.append(dict(row))
+        #      print(new1)
+        #      print(type(new1))
+        return self.new1
   
     def update(self, update_room_req: UpdateRoomRequest) -> Room:
         updated_room = {}
@@ -80,8 +99,11 @@ class RoomRepository(IBaseRepository):
 
     def get_by_name (self,room_name:str):
         self.data ={}
-       
-        for room in self.data:
-            if room['room_name']== room_name: 
+        
+    
+        for room in self.new1:
+            if room['room_name']== room_name:
+                
                 return room
+           
         return self.data
