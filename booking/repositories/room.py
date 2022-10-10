@@ -1,38 +1,79 @@
 from abc import ABCMeta, abstractmethod
-import json
-import os
-from dto.request.room.update_room import UpdateRoomRequest
 from dto.request.room.add_room import AddRoomRequest
 from dto.request.room.ibase import IBaseRequest
 from dto.response.room.add_room import AddRoomResponse
-
+import os
+from flask import jsonify
+import json
+from dto.request.room.update_room import UpdateRoomRequest
 from entities.room import Room
 from .ibase import IBaseRepository
-DATA_FILE="/tmp/data.json"
+import sqlite3
+import sqlalchemy
+from sqlalchemy import Column, Integer, String, ForeignKey, Table, create_engine, MetaData
+from sqlalchemy.orm import relationship, backref, sessionmaker, registry
+from sqlalchemy.ext.declarative import declarative_base
+from dataclasses import dataclass
+from sqlalchemy import text
+
+DATAFILE= "/tmp/data.json"
+
 class RoomRepository(IBaseRepository):
-     
     def __init__(self):
-        self.data=[]
-        if os.path.exists(DATA_FILE):
-            with open(DATA_FILE) as a:
-                self.data=json.load(a)
-        print(self.data)
-    def get(self):
-        return self.data
+        # self.data =[]
+        # if os.path.exists(DATAFILE):
+        #    with open (DATAFILE) as cf:
+        #          self.data = json.load(cf)
+        self.metadata = MetaData()
+        self.roomtable = Table(
+                       "room_list",
+                        self.metadata,
+                        Column("room_id", Integer, primary_key=True, autoincrement=True),
+                        Column("room_name", String(255)),
+                        Column("room_type", String(255)))
+        
+        
+        self.engine = create_engine("sqlite:////tmp/mydb_3.db")
+        self.conn= self.engine.connect()
+        self.metadata.create_all(self.engine)
+        self.session = sessionmaker(bind=self.engine)()
+        mapper_registry = registry()
+
+
+        try:
+            mapper_registry.map_imperatively(Room, self.roomtable)
+        except:
+            pass
+
+        table_name = 'room_list'
+        query = f'SELECT * FROM {table_name}'
+       # s= self.room.select()
+        new= self.conn.execute(query)
+        self.num1=[]
+        for num in new:
+            
+            
+            self.num1.append(dict(num))
+
+            print("hkjhjfh",self.num1)
+
 
     def insert(self, add_room_req: AddRoomRequest) -> Room:
-        print(f"inserting =>{add_room_req.room_name}")
-        res = {
+        new_room = Room(
+            room_name=add_room_req.room_name,
+            room_type=add_room_req.room_type
+        )
+        result= self.session.add(new_room)
+        self.session.commit()
+        self.session.flush()
+        return new_room
 
-            "room_id": len(self.data)+1,
-            "room_name": add_room_req.room_name,
-            "room_type": add_room_req.room_type
-        }
-        self.data.append(res)
-        with open(DATA_FILE, "w") as a:
-            a.write(json.dumps(self.data))
-        return res
-
+    def get(self):
+        
+            #json_obj=json.dumps(num)
+            #print("hjhkj", json_obj)
+        return self.num1
+        
     def update(self, update_room_req: UpdateRoomRequest) -> Room:
         updated_room = {}
         room_index = -1
@@ -48,15 +89,14 @@ class RoomRepository(IBaseRepository):
         print(updated_room)
         self.data[room_index] = updated_room
 
-        with open(DATA_FILE,"w") as df:
+        with open(DATAFILE,"w") as df:
             df.write(json.dumps(self.data))
         return updated_room 
 
-    def get_room(self, room_name: str):
-        data= {}
+    def get_by_name (self,room_name:str):
+        self.data ={}
        
-        for room in self.data:
-            if room['room_name'] == room_name:
-               return room
-
-        return  data
+        for room in self.num1:
+            if room['room_name']== room_name: 
+                return room
+        return self.data

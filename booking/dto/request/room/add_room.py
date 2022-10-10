@@ -1,10 +1,7 @@
 import dataclasses
-from exception.errors import ValidationError
 
 from entities.room_type import RoomType
-from dto.request.room.ibase import IBaseRequest
-
-DEFAULT_ROOM_TYPES = ["Delux", "Ordinary"]
+from .ibase import IBaseRequest
 
 @dataclasses.dataclass
 class AddRoomRequest(IBaseRequest):
@@ -16,19 +13,3 @@ class AddRoomRequest(IBaseRequest):
             raise ValueError("Room type required")
         elif not self.room_name:
             raise ValueError("Room name required")
-       # self.__validate_roomtype()
-        #self.__validate_room_name()
-
-
-    def __validate_roomtype(self):
-        if self.room_type not in DEFAULT_ROOM_TYPES:
-            raise ValidationError("Invalid room type")
-    
-    def __validate_room_name(self):
-        if type(self.room_name) != str:
-            raise ValidationError("Room name must be string") 
-
-
-if __name__ == "__main__":
-    rr = AddRoomRequest("Delux", "Delux")      
-    print(rr)      
